@@ -17,8 +17,9 @@ $offset = ($page - 1) * $limit;
 
 
 
-$query = "SELECT id, title, SUBSTR(body, 1, 100) AS body , created_at, image 
+$query = "SELECT id, title, SUBSTR(body, 1, 100) AS body , DATE(created_at) as date, image 
           FROM posts
+          ORDER BY created_at DESC
           LIMIT $limit OFFSET $offset";
 
 $result = mysqli_query($conn, $query);
@@ -55,8 +56,11 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </div>
 <!-- Banner Ends Here -->
 
+
+
 <div class="latest-products">
   <div class="container">
+    <?php include "inc/messages.php" ?>
     <div class="row">
       <div class="col-md-12">
         <div class="section-heading">
@@ -66,7 +70,7 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
       </div>
       <?php
       if (!empty($posts)):
-        foreach ($posts as $post) : ?>
+        foreach ($posts as $post) { ?>
           <div class="col-md-4">
             <div class="product-item">
               <a href="viewPost.php?id=<?= $post['id'] ?>"><img src="assets/images/postImage/<?= $post['image'] ?>" alt=""></a>
@@ -74,7 +78,7 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <a href="viewPost.php?id=<?= $post['id'] ?>">
                   <h4><?= $post['title'] ?></h4>
                 </a>
-                <h6><?= $post['created_at'] ?></h6>
+                <h6><?= $post['date'] ?></h6>
                 <p> <?= $post['body'] . " ..." ?></p>
 
                 <div class="d-flex justify-content-end">
@@ -84,7 +88,7 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
               </div>
             </div>
           </div>
-        <?php endforeach ?>
+        <?php } ?>
 
         <nav aria-label="Page navigation example" class="col-12 d-flex justify-content-center">
           <ul class="pagination">

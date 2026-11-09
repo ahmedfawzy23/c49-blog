@@ -1,3 +1,7 @@
+<?php session_start();
+require_once "inc/functions.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +13,12 @@
         * {
             box-sizing: border-box;
         }
-        .nav .links a:hover , button:hover{
-            background-color:#8000ff ;
+
+        .nav .links a:hover,
+        button:hover {
+            background-color: #8000ff;
         }
+
         body {
             display: flex;
             flex-direction: column;
@@ -99,7 +106,8 @@
             justify-content: space-around;
             align-items: center;
         }
-        .wrong{
+
+        .wrong {
             color: red;
         }
     </style>
@@ -113,19 +121,19 @@
         </div>
     </div>
     <div>
-    <?php
-?>
+        <?php
+        ?>
+        <?php include "inc/messages.php" ?>
+        <form class="form" action="handlers/register.php" method="post">
 
-        <form class="form" action="" method="post">
-            
             <h3>Register Here</h3>
-            <input placeholder="Enter Name" class="input" type="text" name="name" id=""value="">
-            <input placeholder="Enter Email" class="input" type="email" name="email" id=""value="">
+            <input placeholder="Enter Name" class="input" type="text" name="name" id="" value="<?= old('name') ?>">
+            <input placeholder="Enter Email" class="input" type="email" name="email" id="" value="<?= old('email') ?>">
             <input class="input" placeholder="Enter Password" type="password" name="password" id="">
-            <input class="input" placeholder="Enter your phone " type="text" name="phone" id="">
+            <input class="input" placeholder="Enter your phone " type="text" name="phone" id="" value="<?= old('phone') ?>">
             <button type="submit" name="submit">Register</button>
-           
-            
+
+
 
         </form>
     </div>

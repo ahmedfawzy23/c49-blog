@@ -9,9 +9,12 @@
         * {
             box-sizing: border-box;
         }
-        .nav .links a:hover , button:hover{
-            background-color:#8000ff ;
+
+        .nav .links a:hover,
+        button:hover {
+            background-color: #8000ff;
         }
+
         body {
             display: flex;
             flex-direction: column;
@@ -99,7 +102,8 @@
             justify-content: space-around;
             align-items: center;
         }
-        .wrong{
+
+        .wrong {
             color: red;
         }
     </style>
@@ -113,17 +117,17 @@
         </div>
     </div>
     <div>
-    <?php
-?>
+        <?php
+        ?>
 
-        <form class="form" action="" method="post">
-            
+        <form class="form" action="handlers/Login.php" method="post">
+
             <h3>Login Here</h3>
-            <input placeholder="Enter Email" class="input" type="email" name="email" id=""value="">
+            <input placeholder="Enter Email" class="input" type="email" name="email" id="" value="">
             <input class="input" placeholder="Enter Password" type="password" name="password" id="">
             <button type="submit" name="submit">Login</button>
-           
-            
+
+
 
         </form>
     </div>

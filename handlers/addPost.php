@@ -1,14 +1,12 @@
 <?php
+session_start();
+require_once "../inc/conn.php";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     $title = trim(htmlspecialchars($_POST['title']));
     $body = trim(htmlspecialchars($_POST['body']));
     $image = $_FILES['image'];
 
-
-    // echo "<pre>";
-    // print_r($image);
-    // die();
 
     $errors = [];
     if (empty($title)) {
@@ -34,10 +32,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     } else if ($image['size'] > 2 * pow(1024, 2)) { // 2MB => 2 * 1024 * 1024
         $errors[] = "image too Big | max 2 mb";
     }
+    if (!empty($errors)) {
+        $_SESSION['old'] = $_POST;
+        $_SESSION['errors'] = $errors;
+        header('location: ../addPost.php');
+        exit();
+    }
 
-    echo "<pre>";
-    print_r($errors);
-    die();
+    $imgName = uniqid() . "." . $ext;
+    $user_id = $_SESSION['user']['id'];
+    $sql = "INSERT INTO posts (title, body, image, user_id)
+            VALUES ('$title', '$body', '$imgName', $user_id)";
+
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        move_uploaded_file($image['tmp_name'], "../assets/images/postImage/$imgName");
+        $_SESSION['success'] = "Post Created Successfully";
+        header('location: ../index.php');
+        exit();
+    } else {
+        $_SESSION['errors'] = ['Add Post Failed'];
+        header('location: ../addPost.php');
+        exit();
+    }
 } else {
     header('location: ../addPost.php');
     exit();

@@ -1,4 +1,11 @@
-<?php require_once 'inc/header.php' ?>
+<?php
+require_once 'inc/header.php';
+require_once 'inc/functions.php';
+require_once 'inc/auth.php';
+
+
+
+?>
 
 <!-- Page Content -->
 <div class="page-heading products-heading header-text">
@@ -19,14 +26,16 @@
   <div class="d-flex justify-content-center">
     <h3 class="my-5">add new Post</h3>
   </div>
+  <?php include "inc/messages.php" ?>
+
   <form method="POST" action="handlers/addPost.php" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" name="title" value="">
+      <input type="text" class="form-control" id="title" name="title" value="<?= old('title') ?>">
     </div>
     <div class="mb-3">
       <label for="body" class="form-label">Body</label>
-      <textarea class="form-control" id="body" name="body" rows="5"></textarea>
+      <textarea class="form-control" id="body" name="body" rows="5"><?= old('body') ?></textarea>
     </div>
     <div class="mb-3">
       <label for="body" class="form-label">image</label>
