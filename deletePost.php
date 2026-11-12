@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'inc/conn.php';
+require_once 'inc/auth.php';
 
 
 $id = $_GET['id'] ?? null;

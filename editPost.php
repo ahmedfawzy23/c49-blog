@@ -2,6 +2,8 @@
 require_once 'inc/header.php';
 require_once 'inc/conn.php';
 require_once 'inc/functions.php';
+require_once 'inc/auth.php';
+
 
 
 $id = $_GET['id'] ?? null;

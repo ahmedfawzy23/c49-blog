@@ -1,6 +1,14 @@
-<?php session_start(); ?>
+<?php session_start();
+
+$storedLang = $_COOKIE['lang'] ?? 'ar';
+// echo "<pre>";
+// print_r($_COOKIE);
+// die();
+$lang = include "lang/{$storedLang}.php";
+$dir = $storedLang == 'ar' ? 'rtl' : 'ltr';
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $storedLang ?>" dir="<?= $dir ?>">
 
 <head>
 
@@ -54,7 +62,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.php">All Posts
+              <a class="nav-link" href="index.php"><?= $lang['all_posts']  ?>
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -62,21 +70,21 @@
             if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true) :
             ?>
               <li class="nav-item">
-                <a class="nav-link" href="addPost.php">Add New Post</a>
+                <a class="nav-link" href="addPost.php"><?= $lang['add_new_post']  ?></a>
               </li>
             <?php endif; ?>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">English</a>
+              <a class="nav-link" href="lang/lang.php?lang=en">English</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">العربية</a>
+              <a class="nav-link" href="lang/lang.php?lang=ar">العربية</a>
             </li>
             <?php
             if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true) :
             ?>
               <li class="nav-item">
-                <a class="nav-link" href="logout.php">Logout</a>
+                <a class="nav-link" href="logout.php"><?= $lang['logout'] ?></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link"><?= $_SESSION['user']['name'] ?? '' ?></a>

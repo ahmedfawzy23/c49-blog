@@ -17,7 +17,7 @@ $offset = ($page - 1) * $limit;
 
 
 
-$query = "SELECT id, title, SUBSTR(body, 1, 100) AS body , DATE(created_at) as date, image 
+$query = "SELECT id, title_$storedLang as title, SUBSTR(body, 1, 100) AS body , DATE(created_at) as date, image 
           FROM posts
           ORDER BY created_at DESC
           LIMIT $limit OFFSET $offset";

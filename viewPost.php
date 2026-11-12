@@ -56,9 +56,11 @@ if (empty($post)) {
             <?= $post['body'] ?>
           </div>
           <div class="d-flex justify-content-center">
-            <a href="editPost.php?id=<?= $post['id'] ?>" class="btn btn-success mr-3 "> edit post</a>
+            <?php if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']): ?>
+              <a href="editPost.php?id=<?= $post['id'] ?>" class="btn btn-success mr-3 "> edit post</a>
 
-            <a href="deletePost.php?id=<?= $post['id'] ?>" class="btn btn-danger "> delete post</a>
+              <a href="deletePost.php?id=<?= $post['id'] ?>" class="btn btn-danger "> delete post</a>
+            <?php endif; ?>
           </div>
         </div>
       </div>
